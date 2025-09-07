@@ -1,4 +1,7 @@
+import { useI18n } from "../utils/i18n.jsx";
+
 const CentersSection = () => {
+  const { t } = useI18n();
   const centers = [
     {
       name: " Carnoustie Ayurveda & Wellness Resort",
@@ -27,42 +30,42 @@ const CentersSection = () => {
   ];
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-green-50 to-amber-50">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-emerald-50 via-white to-emerald-50">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-green-800 mb-4">
-            Popular <span className="text-amber-600">Panchakarma Centers</span>
+        <div className="text-center mb-10 sm:mb-14">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-emerald-900 mb-3">
+            {t('centers.title', 'Popular Panchakarma Centers')}
           </h2>
-          <p className="text-lg text-green-700 max-w-2xl mx-auto">
-            Discover trusted Ayurvedic centers offering authentic Panchakarma treatments
+          <p className="text-emerald-800/80 max-w-2xl mx-auto text-sm sm:text-base">
+            {t('centers.subtitle', 'Discover trusted centers offering authentic, therapist‑led treatments.')}
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {centers.map((center, index) => (
-            <div key={index} className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden border border-green-100 flex flex-col transform hover:-translate-y-2 hover:scale-105 group">
+            <div key={index} className="bg-white rounded-2xl shadow-sm hover:shadow-emerald-200/60 hover:shadow-2xl transition-all duration-300 overflow-hidden border border-emerald-100 flex flex-col transform hover:-translate-y-1 group">
               <div className="h-52 relative overflow-hidden">
                 <img 
                   src={center.image} 
                   alt={center.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125 group-hover:rotate-1"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-green-900/40 to-transparent transition-opacity duration-500 group-hover:from-green-900/60"></div>
-                <div className="absolute top-3 right-3 bg-amber-100 px-3 py-1 rounded-full text-sm font-semibold text-green-800 transition-all duration-300 group-hover:scale-110 group-hover:bg-amber-200">
+                <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/40 to-transparent transition-opacity duration-300 group-hover:from-emerald-900/50"></div>
+                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-sm font-semibold text-emerald-900 border border-emerald-100">
                   ⭐ {center.rating}
                 </div>
               </div>
               
               <div className="p-5 flex-1 flex flex-col">
-                <h3 className="text-lg font-bold text-green-800 mb-2 leading-tight transition-colors duration-300 group-hover:text-green-900">
+                <h3 className="text-lg font-semibold text-emerald-900 mb-2 leading-tight">
                   {center.name}
                 </h3>
-                <p className="text-green-600 mb-4 text-sm flex items-center transition-colors duration-300 group-hover:text-green-700">
-                  📍 {center.location}
+                <p className="text-emerald-700 mb-4 text-sm flex items-center">
+                  <span aria-hidden className="mr-1">📍</span> {center.location}
                 </p>
                 
-                <button className="w-full bg-green-700 text-white py-2.5 px-4 rounded-xl font-medium hover:bg-green-800 transition-all duration-300 mt-auto transform hover:scale-105 hover:shadow-lg">
-                  Book Now
+                <button className="w-full bg-emerald-600 text-white py-2.5 px-4 rounded-xl font-medium hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-300/40 transition-all duration-200 mt-auto">
+                  {t('centers.bookNow', 'Book Now')}
                 </button>
               </div>
             </div>

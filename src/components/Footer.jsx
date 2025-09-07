@@ -1,4 +1,7 @@
+import { useI18n } from "../utils/i18n";
+
 const Footer = () => {
+  const { t } = useI18n();
   return (
     <footer className="bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <div className="absolute inset-0 bg-black/10"></div>
@@ -6,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Social Connections */}
           <div className="text-center md:text-left">
-            <h3 className="text-xl font-bold mb-4 text-white">Connect With Us</h3>
+            <h3 className="text-xl font-bold mb-4 text-white">{t('footer.connect', 'Connect With Us')}</h3>
             <div className="flex justify-center md:justify-start space-x-4">
               <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -25,26 +28,26 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="text-center md:text-left">
-            <h3 className="text-xl font-bold mb-4 ml-15 text-white">Quick Links</h3>
+            <h3 className="text-xl font-bold mb-4 ml-15 text-white">{t('footer.quicklinks', 'Quick Links')}</h3>
             <div className="flex justify-center md:justify-start space-x-6">
-              <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">About Us</a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">Services</a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">Contact</a>
+              <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">{t('footer.link.about', 'About Us')}</a>
+              <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">{t('footer.link.services', 'Services')}</a>
+              <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">{t('footer.link.contact', 'Contact')}</a>
             </div>
           </div>
 
           {/* Subscribe */}
           <div className="text-center md:text-left">
-            <h3 className="text-xl font-bold mb-4 text-white">Subscribe</h3>
-            <p className="text-gray-300 mb-4 text-sm">Get wellness tips delivered to your inbox</p>
+            <h3 className="text-xl font-bold mb-4 text-white">{t('footer.subscribe', 'Subscribe')}</h3>
+            <p className="text-gray-300 mb-4 text-sm">{t('footer.subscribe.subtitle', 'Get wellness tips delivered to your inbox')}</p>
             <div className="flex flex-col gap-3 sm:flex-row sm:gap-2">
               <input 
                 type="email" 
-                placeholder="Enter your email" 
+                placeholder={t('footer.subscribe.placeholder', 'Enter your email')} 
                 className="px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-600 focus:border-white focus:outline-none flex-1 w-full sm:w-auto"
               />
               <button className="px-6 py-2 bg-white text-black rounded-lg hover:bg-gray-200 transition-colors duration-300 font-medium w-full sm:w-auto">
-                Submit
+                {t('footer.subscribe.submit', 'Submit')}
               </button>
             </div>
           </div>
@@ -52,7 +55,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-600/30 pt-6 text-center">
           <p className="text-sm text-gray-300 hover:text-white transition-colors duration-300">
-            © 2024 Ayurveda Management. All rights reserved.
+            {t('footer.copyright', '© 2024 Ayurveda Management. All rights reserved.')}
           </p>
         </div>
       </div>

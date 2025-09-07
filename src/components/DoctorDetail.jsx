@@ -13,7 +13,7 @@ const DoctorDetail = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Doctor Not Found</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Vaidya Not Found</h2>
           <button
             onClick={() => navigate('/appointment-booking')}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg"
@@ -37,7 +37,7 @@ const DoctorDetail = () => {
 
   const handleBookAppointment = () => {
     const symptoms = location.state?.symptoms || '';
-    
+
     // Use appointment manager to book appointment
     const appointment = appointmentManager.bookAppointment(
       {
@@ -46,16 +46,16 @@ const DoctorDetail = () => {
       },
       doctor.username // Use doctor's username as key
     );
-    
+
     // Navigate to confirmation
-    navigate('/confirm-appointment', { 
-      state: { 
-        doctor, 
+    navigate('/confirm-appointment', {
+      state: {
+        doctor,
         appointment: {
           ...appointment,
           doctorName: doctor.vaidya_name
         }
-      } 
+      }
     });
   };
 
@@ -125,7 +125,7 @@ const DoctorDetail = () => {
                 </div>
 
                 <div className="bg-green-50 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Why Choose This Doctor?</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Why Choose This Vaidya?</h3>
                   <ul className="space-y-2 text-gray-700">
                     <li className="flex items-center space-x-2">
                       <span className="w-2 h-2 bg-green-500 rounded-full"></span>

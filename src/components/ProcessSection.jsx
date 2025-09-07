@@ -1,81 +1,106 @@
 import { Search, MapPin, Stethoscope, TrendingUp, Heart } from "lucide-react";
+import { motion } from "framer-motion";
+import { useI18n } from "../utils/i18n.jsx";
 
 const ProcessSection = () => {
+  const { t } = useI18n();
+
   const steps = [
     {
       icon: Search,
-      title: "Know Your Diseases",
-      description:
-        "Understand your health conditions through comprehensive Ayurvedic assessment and diagnosis.",
+      title: t('process.step1.title', 'Know Your Diseases'),
+      description: t('process.step1.desc', 'Understand your health conditions through comprehensive Ayurvedic assessment and diagnosis.'),
     },
     {
       icon: MapPin,
-      title: "Find Nearby Centers",
-      description:
-        "Locate certified Ayurved health centers and practitioners in your area.",
+      title: t('process.step2.title', 'Find Nearby Centers'),
+      description: t('process.step2.desc', 'Locate certified Ayurved health centers and practitioners in your area.'),
     },
     {
       icon: Stethoscope,
-      title: "Consult & Plan",
-      description:
-        "Vaidya diagnoses and creates a personalized digital Panchakarma plan.",
+      title: t('process.step3.title', 'Consult & Plan'),
+      description: t('process.step3.desc', 'Vaidya diagnoses and creates a personalized digital Panchakarma plan.'),
     },
     {
       icon: TrendingUp,
-      title: "Track & Heal",
-      description:
-        "Log your daily progress, track milestones, and communicate with your therapist easily.",
+      title: t('process.step4.title', 'Track & Heal'),
+      description: t('process.step4.desc', 'Log your daily progress, track milestones, and communicate with your therapist easily.'),
     },
     {
       icon: Heart,
-      title: "Recover & Thrive",
-      description:
-        "Receive post-therapy guidance and see your holistic improvement over time.",
+      title: t('process.step5.title', 'Recover & Thrive'),
+      description: t('process.step5.desc', 'Receive post-therapy guidance and see your holistic improvement over time.'),
     },
   ];
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 24, scale: 0.98 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { delay: i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+    })
+  };
+
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-emerald-50">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8 sm:mb-16 animate-fade-in-up">
-          <h2 className="text-xl sm:text-3xl lg:text-5xl font-bold text-black mb-4 sm:mb-6 font-mono transition-all duration-1000 hover:scale-105 px-2">
-            Your Journey to Wellness,{" "}
-            <span className="text-[#2E7D32] animate-pulse hover:animate-ping">Streamlined</span>
+        <div className="text-center mb-10 sm:mb-16">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-emerald-900 mb-3 sm:mb-4 tracking-tight">
+            {t('process.title', 'Your Journey to Wellness')}
           </h2>
+          <p className="text-emerald-800/80 max-w-2xl mx-auto text-sm sm:text-base">
+            {t('process.subtitle', 'Simple, guided steps that take you from discovery to long‑term balance.')}
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 animate-fade-in-up animation-delay-300 px-2 sm:px-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 px-2 sm:px-0">
           {steps.map((step, index) => {
             const IconComponent = step.icon;
             return (
-              <div key={index} className="text-center group hover:drop-shadow-2xl animate-fade-in-up" style={{perspective: '1000px', animationDelay: `${index * 200}ms`}} onClick={() => {}}>
-                <div className="relative h-64 sm:h-72 lg:h-80 w-full transition-all duration-700 md:group-hover:rotate-y-180 md:group-hover:scale-105 md:group-hover:-translate-y-2 group-active:scale-105 group-active:-translate-y-2" style={{transformStyle: 'preserve-3d'}}>
+              <motion.div
+                key={index}
+                className="text-center group"
+                style={{ perspective: '1000px' }}
+                custom={index}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                whileHover={{ y: -6 }}
+              >
+                <div className="relative h-64 sm:h-72 lg:h-80 w-full rounded-xl transition-all duration-700 md:group-hover:rotate-y-180 md:group-hover:scale-[1.03] md:group-hover:-translate-y-2" style={{transformStyle: 'preserve-3d'}}>
                   {/* Front of card */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-50/80 to-green-100/60 backdrop-blur-lg border border-green-300/50 rounded-lg sm:rounded-xl p-4 sm:p-6 flex flex-col justify-center items-center shadow-lg group-hover:shadow-green-400/50 group-hover:shadow-2xl group-active:shadow-green-400/50 group-active:shadow-2xl transition-shadow duration-300" style={{backfaceVisibility: 'hidden'}}>
+                  <div className="absolute inset-0 bg-white/80 backdrop-blur-lg border border-emerald-200 rounded-xl p-4 sm:p-6 flex flex-col justify-center items-center shadow-sm group-hover:shadow-xl group-hover:shadow-emerald-200/60 transition-shadow duration-300" style={{backfaceVisibility: 'hidden'}}>
                     <div className="relative mb-4 sm:mb-6">
-                      <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-[#2E7D32] rounded-full flex items-center justify-center mx-auto transition-all duration-500 shadow-lg hover:rotate-12 hover:bg-[#4CAF50] animate-spin-slow">
-                        <IconComponent className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-white transition-transform duration-300 hover:scale-110" />
-                      </div>
-                      <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-6 h-6 sm:w-8 sm:h-8 bg-[#4CAF50] rounded-full flex items-center justify-center text-white font-bold text-sm hover:animate-spin">
+                      <motion.div
+                        className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-emerald-600 rounded-2xl flex items-center justify-center mx-auto transition-transform duration-300 shadow-md group-hover:rotate-3"
+                        animate={{ y: [0, -4, 0] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: index * 0.1 }}
+                      >
+                        <IconComponent className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-white" />
+                      </motion.div>
+                      <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-6 h-6 sm:w-8 sm:h-8 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
                         {index + 1}
                       </div>
                     </div>
-                    <h3 className="text-base sm:text-lg lg:text-xl font-bold text-green-800 mb-2 sm:mb-4 font-mono text-center transition-all duration-300 hover:text-[#2E7D32] hover:scale-110 animate-fade-in leading-tight px-2">
+                    <h3 className="text-base sm:text-lg lg:text-xl font-semibold text-emerald-900 mb-2 sm:mb-4 leading-tight px-2">
                       {step.title}
                     </h3>
-                    <p className="text-sm leading-relaxed text-green-700 font-medium text-center md:hidden px-2">
+                    <p className="text-sm leading-relaxed text-emerald-800/80 font-medium text-center md:hidden px-2">
                       {step.description}
                     </p>
                   </div>
                   
                   {/* Back of card - desktop only */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#2E7D32]/30 to-[#4CAF50]/20 backdrop-blur-lg border border-green-400/50 rounded-xl p-4 sm:p-6 flex-col justify-center shadow-lg group-hover:shadow-green-500/60 group-hover:shadow-2xl transition-shadow duration-300 hidden md:flex" style={{backfaceVisibility: 'hidden', transform: 'rotateY(180deg)'}}>
-                    <p className="text-sm sm:text-base text-green-900 font-semibold leading-relaxed text-center">
+                  <div className="absolute inset-0 bg-emerald-50/60 backdrop-blur-lg border border-emerald-200 rounded-xl p-4 sm:p-6 flex-col justify-center shadow-sm hidden md:flex" style={{backfaceVisibility: 'hidden', transform: 'rotateY(180deg)'}}>
+                    <p className="text-sm sm:text-base text-emerald-900 font-medium leading-relaxed text-center">
                       {step.description}
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
