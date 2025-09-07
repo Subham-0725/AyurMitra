@@ -6,6 +6,7 @@ import { ChevronDown, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useUser, useClerk } from '@clerk/clerk-react';
 import { doctorAuthService } from '../services/doctorAuthService';
+import { therapistAuthService } from '../services/therapistAuthService';
 
 const Navbar = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -13,6 +14,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [showSignOutConfirm, setShowSignOutConfirm] = useState(false);
   const [isDoctorLoggedIn, setIsDoctorLoggedIn] = useState(false);
+  const [isTherapistLoggedIn, setIsTherapistLoggedIn] = useState(false);
   const { isSignedIn, user } = useUser();
   const { signOut } = useClerk();
   const navigate = useNavigate();
@@ -30,22 +32,23 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Check vaidya authentication status
+  // Check vaidya and therapist authentication status
   useEffect(() => {
-    const checkVaidyaAuth = () => {
+    const checkAuthStates = () => {
       setIsDoctorLoggedIn(doctorAuthService.isLoggedIn());
+      setIsTherapistLoggedIn(therapistAuthService.isLoggedIn());
     };
 
-    checkVaidyaAuth();
+    checkAuthStates();
 
     // Listen for storage changes to update auth status
-    window.addEventListener('storage', checkVaidyaAuth);
+    window.addEventListener('storage', checkAuthStates);
 
     // Also check periodically in case sessionStorage changes in same tab
-    const interval = setInterval(checkVaidyaAuth, 1000);
+    const interval = setInterval(checkAuthStates, 1000);
 
     return () => {
-      window.removeEventListener('storage', checkVaidyaAuth);
+      window.removeEventListener('storage', checkAuthStates);
       clearInterval(interval);
     };
   }, []);
@@ -55,13 +58,17 @@ const Navbar = () => {
       doctorAuthService.logout();
       setIsDoctorLoggedIn(false);
       navigate('/');
+    } else if (isTherapistLoggedIn) {
+      therapistAuthService.logout();
+      setIsTherapistLoggedIn(false);
+      navigate('/');
     } else if (isSignedIn) {
       signOut(() => navigate('/'));
     }
     setShowSignOutConfirm(false);
   };
 
-  const isAnyUserLoggedIn = isSignedIn || isDoctorLoggedIn;
+  const isAnyUserLoggedIn = isSignedIn || isDoctorLoggedIn || isTherapistLoggedIn;
 
   return (
     <>

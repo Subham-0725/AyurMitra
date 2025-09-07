@@ -275,7 +275,7 @@ const DoctorDashboard = () => {
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-800 to-emerald-700 bg-clip-text text-transparent">
-                  {activeSection === "overview" && `🙏 Welcome, Dr. ${displayName}`}
+                  {activeSection === "overview" && `🙏 Welcome, ${displayName}`}
                   {activeSection === "patients" && "👥 Patient Management"}
                   {activeSection === "consultation" && "💬 Consultation Hub"}
                   {activeSection === "treatment" && "🌿 Treatment Planning"}
