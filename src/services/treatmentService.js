@@ -20,6 +20,24 @@ export const treatmentService = {
     }
   },
 
+  // Get treatment plans for a specific patient by name (case-insensitive)
+  getPatientTreatments(patientName) {
+    try {
+      if (!patientName || typeof patientName !== 'string') {
+        return [];
+      }
+      const allPlans = this.getAllTreatmentPlans();
+      const normalized = patientName.trim().toLowerCase();
+      return allPlans.filter(plan => {
+        const planPatient = (plan.patientName || '').toString().trim().toLowerCase();
+        return planPatient === normalized;
+      });
+    } catch (error) {
+      console.error('Error getting patient treatments:', error);
+      return [];
+    }
+  },
+
   // Get all treatment plans
   getAllTreatmentPlans() {
     try {
